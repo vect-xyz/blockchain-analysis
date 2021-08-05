@@ -4,7 +4,7 @@ SELECT
      
      address,eth_balance*pow(0.1,18) as eth_balance_normal
 FROM
-    `xed-project-237404.crypto_ethereum.balances`
+    `bigquery-public-data.crypto_ethereum.balances`
 )
 ,
 eth_balance_bin as
@@ -300,6 +300,8 @@ where address not in
 '0x700f6912e5753e91ea3fae877a2374a2db1245d7',
 '0x60d0cc2ae15859f69bf74dadb8ae3bd58434976b'
 )    
+and address not in 
+(SELECT address FROM `bigquery-public-data.crypto_ethereum.contracts`  )
 
 GROUP BY
     balance_bin
